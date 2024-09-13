@@ -46,4 +46,4 @@ Powerful and flexible keyer with reliable iambic paddle, easily built without an
  - RFI/EMI shielding
   
 
-
+![](https://github.com/djbr1/K3NG-Arduino-Keyer-ESP32_PlatformIO/blob/master/images/IMG_1331.JPG?raw=true)
