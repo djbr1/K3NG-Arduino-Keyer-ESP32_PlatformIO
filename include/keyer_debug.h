@@ -1,4 +1,6 @@
 // don't touch these unless you know what the hell you are doing or you're asked to uncomment these for debug dumps
+// DEBUG_SETUP defined in main.cpp by sp5iou
+// #define DEBUG_SETUP
 // #define DEBUG_STARTUP
 // #define DEBUG_STARTUP_BLINKS
 // #define DEBUG_LOOP

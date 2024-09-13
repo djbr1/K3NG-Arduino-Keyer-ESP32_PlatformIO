@@ -6,7 +6,7 @@ GENERIC STM32F103C
 
 // Initial and hardcoded settings
 #define initial_speed_wpm 26             // "factory default" keyer speed setting
-#define initial_command_mode_speed_wpm 20 // "factory default" command mode speed setting 
+#define initial_command_mode_speed_wpm 30 // "factory default" command mode speed setting  // ignored, reads from EEPROM
 #define initial_sidetone_freq 600        // "factory default" sidetone frequency setting
 #define sidetone_hz_limit_low 299
 #define sidetone_hz_limit_high 2001
@@ -46,13 +46,14 @@ GENERIC STM32F103C
 #define winkey_xoff_threshold 20         // the number of chars in the buffer when we begin sending XOFFs
 #define winkey_xon_threshold 10          // the number of chars in the buffer below which we deactivate XOFF
 #define default_memory_repeat_time 3000  // time in milliseconds
-#define LCD_COLUMNS 16
-#define LCD_ROWS 2
+#define LCD_COLUMNS 11
+#define LCD_ROWS 4
 #define lcd_i2c_address_mathertel_PCF8574 0x27             // I2C address of display for FEATURE_LCD_MATHERTEL_PCF8574
 #define lcd_i2c_address_fdebrander_lcd 0x27                // I2C address of display for FEATURE_LCD_I2C_FDEBRABANDER
 #define lcd_i2c_address_ydv1_lcd 0x27                      // I2C address of display for FEATURE_LCD_YDv1
 //#define lcd_i2c_address_ydv1_lcd 0x38                    // I2C address of display for FEATURE_LCD_YDv1
 #define lcd_i2c_address_sainsmart_lcd 0x27                // I2C address of display for FEATURE_LCD_SAINSMART_I2C 
+#define oled_i2c_address_ssd1306 0x3C                     // I2C address of display for FEATURE_OLED_SSD1306
 #define hell_pixel_microseconds 4025
 #define program_memory_limit_consec_spaces 1
 #define serial_leading_zeros 1            // set to 1 to activate leading zeros in serial numbers (i.e. #1 = 001)
@@ -96,6 +97,12 @@ GENERIC STM32F103C
 #ifdef FEATURE_CAPACITIVE_PADDLE_PINS
   #define capacitance_threshold 2
 #endif //FEATURE_CAPACITIVE_PADDLE_PINS
+
+#ifdef FEATURE_PRESSURE_PADDLES
+  //#define pressure_threshold 10000    // threshold when using get_value (raw data) insted of get_units (calibrated to grams)
+  #define default_pressure_threshold_dot 10003   //  problem: threshold values not taken from config file, last values stored in EEPROM (after 30 seconds)  //  independent sensitivity threshold dot-dash
+  #define default_pressure_threshold_dash 10004   // problem: threshold values not taken from config file, last values stored in EEPROM (after 30 seconds)  //  independent sensitivity threshold dot-dash
+  #endif //FEATURE_PRESSURE_PADDLES
 
 #ifdef FEATURE_LED_RING
   #define led_ring_low_limit 10
@@ -158,12 +165,12 @@ GENERIC STM32F103C
 #endif //FEATURE_WINKEY_EMULATION
 
 
-
-#define PRIMARY_SERIAL_PORT &Serial
+//#define PRIMARY_SERIAL_PORT &Serial 
+#define PRIMARY_SERIAL_PORT &Serial  // configure Serial for regular USB serial;  configure SerialBT for Android phone serial
 #define PRIMARY_SERIAL_PORT_BAUD 115200     // This applies only when the port is in Command Line Interface mode.  In Winkey mode it will default to 1200.
 
 #ifdef FEATURE_COMMAND_LINE_INTERFACE_ON_SECONDARY_PORT
-  #define SECONDARY_SERIAL_PORT &Serial1
+  #define SECONDARY_SERIAL_PORT &Serial
   #define SECONDARY_SERIAL_PORT_BAUD 115200
 #endif
 

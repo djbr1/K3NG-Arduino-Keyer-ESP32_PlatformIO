@@ -92,7 +92,7 @@
   #define PRIMARY_SERIAL_CLS USBSerial
   #define SECONDARY_SERIAL_CLS HardwareSerial
 #else
-  #define PRIMARY_SERIAL_CLS HardwareSerial
-  #define SECONDARY_SERIAL_CLS HardwareSerial 
+  #define PRIMARY_SERIAL_CLS HardwareSerial  // configure HardwareSerial for usb serial; configure Bluetooth serial for Android phone
+  #define SECONDARY_SERIAL_CLS HardwareSerial// configure HardwareSerial for usb serial; configure Bluetooth serial for Android phone
 #endif
   

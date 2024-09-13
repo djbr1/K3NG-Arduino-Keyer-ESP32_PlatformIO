@@ -10,8 +10,8 @@ See pin assignment and limitations: https://circuits4you.com/2018/12/31/esp32-de
 
 #define paddle_left 32 //32 Needs external 10k Pullup can be used as touch paddle //22 //36
 #define paddle_right 33 //33 Needs external 10k Pullup can be used as touch paddle23 //39
-#define tx_key_line_1 27 //16 //RX2 pin //2 //18       // (high = key down/tx on)
-#define tx_key_line_2 25 //17 //0
+#define tx_key_line_1 25 //16 //RX2 pin //2 //18 // (high = key down/tx on) //  used for active buzzer - Tone32.h not working
+#define tx_key_line_2 0 //17 //0
 #define tx_key_line_3 0
 #define tx_key_line_4 0
 #define tx_key_line_5 0
@@ -127,8 +127,14 @@ FEATURE_SIDETONE_SWITCH
   #define capactive_paddle_pin_inhibit_pin 0     // if this pin is defined and is set high, the capacitive paddle pins will switch to normal (non-capacitive) sensing mode
 #endif
 
+
+// #if defined(FEATURE_PRESSURE_PADDLES)
+// #define pressure_paddle_inhibit_pin 0     //  if set to 1 then physical paddles take precedence, pressure paddles ignored
+// #endif
+
+
 #ifdef FEATURE_4x4_KEYPAD
-  #define Row3 0
+  #define Row3 0G
   #define Row2 0
   #define Row1 0
   #define Row0 0
@@ -163,6 +169,18 @@ FEATURE_SIDETONE_SWITCH
 
 #define pin_sending_mode_automatic 0  // goes HIGH when keyer is sending code automatically
 #define pin_sending_mode_manual 0     // goes HIGH when keyer is sending code manually (i.e. the paddle or straight key)
+
+// pins to be defined according to availability, for kc4ifb pins 13,12,14,27 were used
+ #ifdef FEATURE_PRESSURE_PADDLES
+ #define LOADCELL_DOUT_PIN  13
+ #define LOADCELL_SCK_PIN  12
+ #define LOADCELL2_DOUT_PIN  14
+ #define LOADCELL2_SCK_PIN  27
+ #endif //FEATURE_PRESSURE_PADDLES
+
+
+
+
 
 #else
 
